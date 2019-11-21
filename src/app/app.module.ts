@@ -17,6 +17,9 @@ import { SearchFilterPageModule } from './pages/modal/search-filter/search-filte
 
 // Components
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
 
 
 @NgModule({
@@ -28,7 +31,9 @@ import { NotificationsComponent } from './components/notifications/notifications
     AppRoutingModule,
     HttpClientModule,
     ImagePageModule,
-    SearchFilterPageModule
+    SearchFilterPageModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   entryComponents: [NotificationsComponent],
   providers: [
