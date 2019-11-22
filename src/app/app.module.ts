@@ -20,6 +20,7 @@ import { NotificationsComponent } from './components/notifications/notifications
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
+import { UpdateService } from './update.service';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { AngularFireModule } from '@angular/fire';
   providers: [
     StatusBar,
     SplashScreen,
+    UpdateService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
