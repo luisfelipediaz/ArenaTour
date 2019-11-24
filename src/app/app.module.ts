@@ -20,6 +20,7 @@ import { NotificationsComponent } from './components/notifications/notifications
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { UpdateService } from './update.service';
 
 
@@ -28,13 +29,16 @@ import { UpdateService } from './update.service';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      swipeBackEnabled: false
+    }),
     AppRoutingModule,
     HttpClientModule,
     ImagePageModule,
     SearchFilterPageModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
   ],
   entryComponents: [NotificationsComponent],
   providers: [

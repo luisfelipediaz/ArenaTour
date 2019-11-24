@@ -31,6 +31,12 @@ export class AppComponent {
         icon: 'home'
       },
       {
+        title: 'Marcador',
+        url: '/game-scores',
+        direct: 'root',
+        icon: 'baseball'
+      },
+      {
         title: 'About',
         url: '/about',
         direct: 'forward',
@@ -52,7 +58,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-    }).catch(() => {});
+    }).catch(() => { });
   }
 
   goToEditProgile() {

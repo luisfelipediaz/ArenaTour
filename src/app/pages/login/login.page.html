@@ -1,11 +1,11 @@
-<ion-content padding class="animated fadeIn login auth-page">
+<ion-content class="animated fadeIn login auth-page ion-padding">
   <div class="theme-bg"></div>
   <div class="auth-content">
 
     <!-- Logo -->
-    <div padding-horizontal text-center class="animated fadeInDown">
+    <div class="animated fadeInDown ion-padding-horizontal ion-text-center">
       <div class="logo"></div>
-      <h4 no-margin>
+      <h4 class="ion-no-margin">
         <ion-text color="light" class="fw700">
           Arena Tour
         </ion-text>
@@ -14,7 +14,7 @@
 
     <!-- Login form -->
     <form [formGroup]="onLoginForm" class="list-form">
-      <ion-item no-padding class="animated fadeInUp">
+      <ion-item class="ion-no-padding animated fadeInUp">
         <ion-label position="floating">
           <ion-icon name="mail" item-start></ion-icon>
           Email
@@ -27,7 +27,7 @@
         </ion-text>
       </p>
 
-      <ion-item no-padding class="animated fadeInUp">
+      <ion-item class="ion-no-padding animated fadeInUp">
         <ion-label position="floating">
           <ion-icon name="lock" item-start></ion-icon>
           Password
@@ -41,7 +41,7 @@
         </p>
     </form>
 
-    <p text-right tappable (click)="forgotPass()" class="paz">
+    <p tappable (click)="forgotPass()" class="ion-text-right paz">
       <ion-text color="light">
         <strong>Forgot Pass?</strong>
       </ion-text>
@@ -53,7 +53,7 @@
         Signin
       </ion-button>
 
-      <p text-center>
+      <p class="ion-text-center">
         <ion-text color="light">
           Or Signin with:
         </ion-text>
