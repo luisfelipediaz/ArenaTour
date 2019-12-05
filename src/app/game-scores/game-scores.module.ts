@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { GameScoresPage } from './game-scores.page';
 import { ButtonsComponent } from './buttons/buttons.component';
+import { GameScoreComponent } from './game-score/game-score.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [GameScoresPage, ButtonsComponent]
+  declarations: [GameScoresPage, ButtonsComponent, GameScoreComponent]
 })
 export class GameScoresPageModule {}

@@ -1,0 +1,32 @@
+<ion-grid>
+    <ion-row>
+        <ion-col>
+            <h1>{{score.team1}}</h1>
+            <!-- <app-buttons (increment)="incrementTeamOne()" (decrement)="decrementTeamOne()"></app-buttons> -->
+        </ion-col>
+        <ion-col>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        {{game.team1.name}}
+                    </ion-col>
+                    <ion-col>
+                        {{game.team2.name}}
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        {{setsTeam1}}
+                    </ion-col>
+                    <ion-col>
+                        {{setsTeam2}}
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-col>
+        <ion-col>
+            <h1>{{score.team2}}</h1>
+            <!-- <app-buttons (increment)="incrementTeamTwo()" (decrement)="decrementTeamTwo()"></app-buttons> -->
+        </ion-col>
+    </ion-row>
+</ion-grid>

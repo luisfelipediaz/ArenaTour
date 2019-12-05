@@ -12,36 +12,5 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <h1>{{team1$ | async}}</h1>
-        <app-buttons (increment)="incrementTeamOne()" (decrement)="decrementTeamOne()"></app-buttons>
-      </ion-col>
-      <ion-col>
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              BOG.
-            </ion-col>
-            <ion-col>
-              ANT.
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              2
-            </ion-col>
-            <ion-col>
-              1
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-col>
-      <ion-col>
-        <h1>{{team2$ | async}}</h1>
-        <app-buttons (increment)="incrementTeamTwo()" (decrement)="decrementTeamTwo()"></app-buttons>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <app-game-score [game]="game"></app-game-score>
 </ion-content>

@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Game } from '../app.model';
 
 @Component({
   selector: 'app-game-scores',
@@ -15,6 +16,15 @@ export class GameScoresPage implements OnInit {
   document: AngularFirestoreDocument<{ team1: firebase.firestore.FieldValue, team2: firebase.firestore.FieldValue }>;
   team1$: Observable<firebase.firestore.FieldValue>;
   team2$: Observable<firebase.firestore.FieldValue>;
+
+  game: Game = {
+    finish: false,
+    scores: [{ team1: 12, team2: 20, winner: null }],
+    set: 1,
+    team1: { id: '1', name: 'BOG.' },
+    team2: { id: '1', name: 'ANT.' },
+    winner: null
+  };
 
   constructor(
     private fs: AngularFirestore

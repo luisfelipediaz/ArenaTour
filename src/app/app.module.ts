@@ -22,10 +22,12 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { UpdateService } from './update.service';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { HomeComponent } from './pages/home/home.component';
 
 
 @NgModule({
-  declarations: [AppComponent, NotificationsComponent],
+  declarations: [AppComponent, NotificationsComponent, HomeComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -39,6 +41,7 @@ import { UpdateService } from './update.service';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   entryComponents: [NotificationsComponent],
   providers: [
@@ -50,4 +53,4 @@ import { UpdateService } from './update.service';
   bootstrap: [AppComponent]
 })
 
-export class AppModule {}
+export class AppModule { }
