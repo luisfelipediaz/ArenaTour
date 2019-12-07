@@ -17,14 +17,39 @@ export class GameScoresPage implements OnInit {
   team1$: Observable<firebase.firestore.FieldValue>;
   team2$: Observable<firebase.firestore.FieldValue>;
 
-  game: Game = {
-    finish: false,
-    scores: [{ team1: 12, team2: 20, winner: null }],
-    set: 1,
-    team1: { id: '1', name: 'BOG.' },
-    team2: { id: '1', name: 'ANT.' },
-    winner: null
-  };
+  games: Game[] = [
+    {
+      finish: false,
+      scores: [{ team1: 12, team2: 20, winner: null }],
+      set: 1,
+      team1: { id: '1', name: 'BOG.' },
+      team2: { id: '1', name: 'ANT.' },
+      winner: null
+    },
+    {
+      finish: false,
+      scores: [
+        { team1: 12, team2: 21, winner: 'team2' },
+        { team1: 7, team2: 10, winner: null },
+      ],
+      set: 2,
+      team1: { id: '1', name: 'VAL.' },
+      team2: { id: '1', name: 'QUI.' },
+      winner: null
+    },
+    {
+      finish: false,
+      scores: [
+        { team1: 12, team2: 21, winner: 'team2' },
+        { team1: 21, team2: 10, winner: 'team1' },
+        { team1: 14, team2: 10, winner: null },
+      ],
+      set: 3,
+      team1: { id: '1', name: 'CUN.' },
+      team2: { id: '1', name: 'BOG.' },
+      winner: null
+    },
+  ];
 
   constructor(
     private fs: AngularFirestore
