@@ -13,6 +13,7 @@ const routes: Routes = [
       { path: 'edit-profile', loadChildren: './pages/edit-profile/edit-profile.module#EditProfilePageModule' },
       { path: 'home-results', loadChildren: './pages/home-results/home-results.module#HomeResultsPageModule' },
       { path: 'game-scores', loadChildren: './game-scores/game-scores.module#GameScoresPageModule' },
+      { path: 'tienda', loadChildren: './pages/tienda/tienda.module#TiendaPageModule' },
       {
         path: '',
         pathMatch: 'full',
@@ -20,8 +21,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },  { path: 'tienda', loadChildren: './tienda/tienda.module#TiendaPageModule' },
-  { path: 'tienda', loadChildren: './pages/tienda/tienda.module#TiendaPageModule' }
+  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
 
 ];
 

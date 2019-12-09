@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
       },
       {
         title: 'Tienda',
-        url: '/about',
+        url: '/tienda',
         direct: 'forward',
         icon: 'card'
       },
