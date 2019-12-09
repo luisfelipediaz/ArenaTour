@@ -20,7 +20,9 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' }
+  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },  { path: 'tienda', loadChildren: './tienda/tienda.module#TiendaPageModule' },
+  { path: 'tienda', loadChildren: './pages/tienda/tienda.module#TiendaPageModule' }
+
 ];
 
 @NgModule({

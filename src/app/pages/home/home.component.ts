@@ -35,10 +35,22 @@ export class HomeComponent implements OnInit {
         icon: 'baseball'
       },
       {
-        title: 'About',
+        title: 'Nosotros',
         url: '/about',
         direct: 'forward',
         icon: 'information-circle-outline'
+      },
+      {
+        title: 'Por Definir',
+        url: '/about',
+        direct: 'forward',
+        icon: 'information-circle-outline'
+      },
+      {
+        title: 'Tienda',
+        url: '/about',
+        direct: 'forward',
+        icon: 'card'
       },
 
       {
