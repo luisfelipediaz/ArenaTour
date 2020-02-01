@@ -31,7 +31,7 @@
     "core-js": "^2.5.4",
     "firebase": "^7.5.0",
     "ionicons": "4.5.5",
-    "rxjs": "~6.5.3",
+    "rxjs": "~6.5.4",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
