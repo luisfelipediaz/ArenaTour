@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
         icon: 'information-circle-outline'
       },
       {
-        title: 'Por Definir',
+        title: 'Historia',
         url: '/about',
         direct: 'forward',
         icon: 'information-circle-outline'
