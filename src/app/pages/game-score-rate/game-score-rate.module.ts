@@ -5,14 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { GameScoresPage } from './game-scores.page';
-import { ButtonsComponent } from './buttons/buttons.component';
+import { GameScoreRatePage } from './game-score-rate.page';
 import { GameScoreComponent } from './game-score/game-score.component';
+import { ButtonsComponent } from './buttons/buttons.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: GameScoresPage
+    component: GameScoreRatePage
   }
 ];
 
@@ -23,6 +23,10 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [GameScoresPage, ButtonsComponent, GameScoreComponent]
+  declarations: [
+    GameScoreRatePage,
+    GameScoreComponent,
+    ButtonsComponent
+  ]
 })
-export class GameScoresPageModule {}
+export class GameScoreRatePageModule { }

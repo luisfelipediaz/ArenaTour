@@ -1,9 +1,10 @@
-export interface Game {
+export interface IGame {
+    id: string;
     team1: Team;
     team2: Team;
     set: number;
-    winner: Team;
-    finish: boolean;
+    winner: 'team1' | 'team2';
+    ended: boolean;
     scores: Score[];
 }
 
@@ -16,4 +17,5 @@ export interface Score {
 export interface Team {
     id: string;
     name: string;
+    doubleNumber: number;
 }

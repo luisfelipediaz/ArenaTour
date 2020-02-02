@@ -12,8 +12,9 @@ const routes: Routes = [
       { path: 'settings', loadChildren: './pages/settings/settings.module#SettingsPageModule' },
       { path: 'edit-profile', loadChildren: './pages/edit-profile/edit-profile.module#EditProfilePageModule' },
       { path: 'home-results', loadChildren: './pages/home-results/home-results.module#HomeResultsPageModule' },
-      { path: 'game-scores', loadChildren: './game-scores/game-scores.module#GameScoresPageModule' },
+      { path: 'game-scores', loadChildren: './pages/game-scores/game-scores.module#GameScoresPageModule' },
       { path: 'tienda', loadChildren: './pages/tienda/tienda.module#TiendaPageModule' },
+      { path: 'game-score-rate', loadChildren: './pages/game-score-rate/game-score-rate.module#GameScoreRatePageModule' },
       {
         path: '',
         pathMatch: 'full',
@@ -22,7 +23,6 @@ const routes: Routes = [
     ]
   },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
-
 ];
 
 @NgModule({

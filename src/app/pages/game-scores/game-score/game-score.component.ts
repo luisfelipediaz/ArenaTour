@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Game, Score } from 'src/app/app.model';
+import { IGame, Score } from 'src/app/app.model';
 
 @Component({
   selector: 'app-game-score',
@@ -7,7 +7,7 @@ import { Game, Score } from 'src/app/app.model';
   styleUrls: ['./game-score.component.scss']
 })
 export class GameScoreComponent implements OnInit {
-  @Input() game: Game;
+  @Input() game: IGame;
 
   get score(): Score {
     return this.game.scores[this.game.set - 1];
