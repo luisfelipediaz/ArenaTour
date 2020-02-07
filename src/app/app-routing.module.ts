@@ -15,6 +15,7 @@ const routes: Routes = [
       { path: 'game-scores', loadChildren: './pages/game-scores/game-scores.module#GameScoresPageModule' },
       { path: 'tienda', loadChildren: './pages/tienda/tienda.module#TiendaPageModule' },
       { path: 'game-score-rate', loadChildren: './pages/game-score-rate/game-score-rate.module#GameScoreRatePageModule' },
+      { path: 'create-game', loadChildren: './pages/create-game/create-game.module#CreateGamePageModule' },
       {
         path: '',
         pathMatch: 'full',
@@ -23,6 +24,7 @@ const routes: Routes = [
     ]
   },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
+
 ];
 
 @NgModule({

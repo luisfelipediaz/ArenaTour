@@ -28,4 +28,8 @@ export class GameScoresPage implements OnInit {
     this.navParams.push('game', game);
     this.navController.navigateForward('game-score-rate');
   }
+
+  goToNewGame() {
+    this.navController.navigateForward('create-game');
+  }
 }

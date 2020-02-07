@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      <ion-menu-button color="secondary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+        <ion-text color="light" class="fw700">Crear partido</ion-text>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="animated fadeIn login auth-page ion-padding">
+
+  <!-- Login form -->
+  <form [formGroup]="newGame" class="list-form">
+    <ion-item class="ion-no-padding animated fadeInUp">
+      <ion-label position="floating">
+        Primer equipo
+      </ion-label>
+      <ion-input color="secondary" type="text" [value]="newGame.value.team1?.id" (click)="openSelector('team1')"
+        readonly></ion-input>
+    </ion-item>
+    <p ion-text class="text08" *ngIf="newGame.get('team1').touched && newGame.get('team1').hasError('required')">
+      <ion-text color="warning">
+        Required Field
+      </ion-text>
+    </p>
+
+    <ion-item class="ion-no-padding animated fadeInUp">
+      <ion-label position="floating">
+        Segundo equipo
+      </ion-label>
+      <ion-input color="secondary" type="text" [value]="newGame.value.team2?.id" (click)="openSelector('team2')"
+        readonly></ion-input>
+    </ion-item>
+    <p ion-text color="warning" class="text08"
+      *ngIf="newGame.get('team2').touched && newGame.get('team2').hasError('required')">
+      <ion-text color="warning">
+        Required Field
+      </ion-text>
+    </p>
+
+    <ion-item class="ion-no-padding animated fadeInUp">
+      <ion-label>
+        ¿Con alargue?
+      </ion-label>
+      <ion-checkbox color="primary" formControlName="lengthen" slot="start"></ion-checkbox>
+    </ion-item>
+  </form>
+
+  <div>
+    <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="saveNewGame()"
+      [disabled]="!newGame.valid" tappable>
+      <ion-icon name="log-in"></ion-icon>
+      Guardar
+    </ion-button>
+  </div>
+
+</ion-content>

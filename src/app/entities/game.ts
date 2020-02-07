@@ -1,22 +1,17 @@
-import { Team, Score, IGame } from '../app.model';
+import { Team, Score, IGame, Teams } from '../app.model';
 
 export class Game implements IGame {
-
-    id: string;
+    id: string = null;
     set: number;
-    winner: 'team1' | 'team2';
+    winner: Teams = null;
     scores: Score[];
     ended = false;
 
-    private get currentSet(): Score {
+    get currentSet(): Score {
         return this.scores[this.set - 1];
     }
 
-    constructor(
-        public team1: Team,
-        public team2: Team,
-        public alargue: boolean
-    ) {
+    constructor(public team1: Team, public team2: Team, public lengthen: boolean) {
         this.set = 1;
         this.scores = [
             { team1: 0, team2: 0, winner: null },
@@ -25,22 +20,67 @@ export class Game implements IGame {
         ];
     }
 
-    rate(team: 'team1' | 'team2') {
+    rate(team: Teams) {
         if (this.ended) { return; }
-
         this.currentSet[team]++;
+        this.proccessIfChangeSet(team);
+    }
 
+    unrate(team: Teams) {
+        if (this.isBeginningGame()) { return; }
+        if (this.currentTeamAtZeroButOtherNo(team)) { return; }
+        if (this.currentTeamNotAreTheWinnerOfPreviousSet(team)) { return; }
+        if (this.gameEndedAndCurrentTeamNotAreWinner(team)) { return; }
+
+        this.verifyBeginingSet();
+        this.winner = null;
+        this.ended = false;
+        this.currentSet[team]--;
+    }
+
+    private gameEndedAndCurrentTeamNotAreWinner(team: string) {
+        return this.ended && this.currentSet.winner !== team;
+    }
+
+    private isBeginningGame(): boolean {
+        return this.set === 1 && this.areAllTeamsAtZero();
+    }
+
+    private currentTeamAtZeroButOtherNo(team: Teams): boolean {
+        return this.currentSet[team] === 0 && this.currentSet[this.getOtherTeam(team)] !== 0;
+    }
+
+    private currentTeamNotAreTheWinnerOfPreviousSet(team: Teams): boolean {
+        return this.areAllTeamsAtZero() && this.set > 1 && this.scores[this.set - 2].winner !== team;
+    }
+
+    private verifyBeginingSet() {
+        if (this.areAllTeamsAtZero()) {
+            this.set--;
+            this.currentSet.winner = null;
+        }
+    }
+
+    private areAllTeamsAtZero() {
+        return this.currentSet.team1 === 0 && this.currentSet.team2 === 0;
+    }
+
+    private getOtherTeam(team: Teams): Teams {
+        return team === 'team1' ? 'team2' : 'team1';
+    }
+
+    private proccessIfChangeSet(team: Teams) {
         if (this.changeSet(team)) {
             this.changeSetTeam(team);
         }
     }
 
-    private changeSetTeam(team: 'team1' | 'team2') {
+    private changeSetTeam(team: Teams) {
         this.currentSet.winner = team;
         this.verifyEnded(team);
     }
 
-    private verifyEnded(team: 'team1' | 'team2') {
+    private verifyEnded(team: Teams) {
         if (this.scores.filter(a => a.winner === team).length === 2) {
             this.ended = true;
             this.winner = team;
@@ -53,6 +93,14 @@ export class Game implements IGame {
         return this.firstAndSecondSet(team) || this.threeSet(team);
     }
 
+    private firstAndSecondSet(team: string) {
+        return this.set <= 2 && this.currentSet[team] === 21;
+    }
+
+    private threeSet(team: string) {
+        return this.set === 3 && this.currentSet[team] === 15;
+    }
+
     toJSON(): IGame {
         return {
             ended: this.ended,
@@ -61,15 +109,8 @@ export class Game implements IGame {
             set: this.set,
             team1: this.team1,
             team2: this.team2,
-            winner: this.winner
+            winner: this.winner,
+            lengthen: this.lengthen
         };
-    }
-
-    private firstAndSecondSet(team: string) {
-        return this.set <= 2 && this.currentSet[team] === 21;
-    }
-
-    private threeSet(team: string) {
-        return this.set === 3 && this.currentSet[team] === 15;
     }
 }

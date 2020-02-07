@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { GameScoreRatePage } from './game-score-rate.page';
 import { GameScoreComponent } from './game-score/game-score.component';
 import { ButtonsComponent } from './buttons/buttons.component';
+import { SharedModule } from 'src/app/shared.module';
 
 const routes: Routes = [
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)

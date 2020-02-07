@@ -14,7 +14,7 @@ export class GameScoreComponent implements OnInit {
   @Input() game: Game;
 
   get score(): Score {
-    return this.game.scores[this.game.set - 1];
+    return this.game.currentSet;
   }
 
   get setsTeam1(): number {
@@ -25,29 +25,33 @@ export class GameScoreComponent implements OnInit {
     return this.game.scores.filter(score => score.winner === 'team2').length;
   }
 
-  constructor(
-    private fs: AngularFirestore
-  ) { }
+  constructor(private fs: AngularFirestore) { }
 
   ngOnInit() {
   }
 
   incrementTeamOne() {
     this.game.rate('team1');
-    this.fs.doc(`games/${this.game.id}`).update(this.game.toJSON());
+    this.saveChanges();
   }
 
   decrementTeamOne() {
-
+    this.game.unrate('team1');
+    this.saveChanges();
   }
 
   incrementTeamTwo() {
     this.game.rate('team2');
-    this.fs.doc(`games/${this.game.id}`).update(this.game.toJSON());
+    this.saveChanges();
   }
 
   decrementTeamTwo() {
+    this.game.unrate('team2');
+    this.saveChanges();
+  }
 
+  private saveChanges() {
+    this.fs.doc(`games/${this.game.id}`).update(this.game.toJSON());
   }
 
 }

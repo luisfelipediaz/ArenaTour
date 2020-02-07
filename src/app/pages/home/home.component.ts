@@ -35,6 +35,12 @@ export class HomeComponent implements OnInit {
         icon: 'baseball'
       },
       {
+        title: 'Nuevo partido',
+        url: '/create-game',
+        direct: 'root',
+        icon: 'add-circle-outline'
+      },
+      {
         title: 'Nosotros',
         url: '/about',
         direct: 'forward',

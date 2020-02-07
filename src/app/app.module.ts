@@ -24,6 +24,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { UpdateService } from './update.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { HomeComponent } from './pages/home/home.component';
+import { TeamPipe } from './team.pipe';
 
 
 @NgModule({
