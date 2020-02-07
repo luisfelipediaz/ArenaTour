@@ -1,10 +1,10 @@
 <ion-grid>
     <ion-row>
-        <ion-col class="ion-no-padding">
+        <ion-col size="2" class="ion-no-padding ion-no-margin">
             <h1>{{score.team1}}</h1>
             <app-buttons (increment)="incrementTeamOne()" (decrement)="decrementTeamOne()"></app-buttons>
         </ion-col>
-        <ion-col size="10">
+        <ion-col size="8">
             <ion-grid>
                 <ion-row>
                     <ion-col>
@@ -24,7 +24,7 @@
                 </ion-row>
             </ion-grid>
         </ion-col>
-        <ion-col class="ion-no-padding">
+        <ion-col size="2" class="ion-no-padding ion-no-margin">
             <h1>{{score.team2}}</h1>
             <app-buttons (increment)="incrementTeamTwo()" (decrement)="decrementTeamTwo()"></app-buttons>
         </ion-col>
