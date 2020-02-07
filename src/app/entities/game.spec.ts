@@ -153,11 +153,14 @@ fdescribe('Game', () => {
     };
 
     game.rate('team1');
+    expect(game.scores[2].winner).toBe('team1');
+
     game.unrate('team1');
 
     expect(game.winner).toBeNull();
     expect(game.set).toEqual(3);
     expect(game.ended).toBeFalsy();
+    expect(game.scores[2].winner).toBeNull();
     expect(game.scores[2].team1).toEqual(14);
     expect(game.scores[2].team2).toEqual(12);
   });

@@ -33,12 +33,17 @@ export class Game implements IGame {
         if (this.gameEndedAndCurrentTeamNotAreWinner(team)) { return; }
 
         this.verifyBeginingSet();
+        this.proccessUnrate(team);
+    }
+
+    private proccessUnrate(team: string) {
         this.winner = null;
+        this.currentSet.winner = null;
         this.ended = false;
         this.currentSet[team]--;
     }
 
-    private gameEndedAndCurrentTeamNotAreWinner(team: string) {
+    private gameEndedAndCurrentTeamNotAreWinner(team: string): boolean {
         return this.ended && this.currentSet.winner !== team;
     }
 
@@ -61,7 +66,7 @@ export class Game implements IGame {
         }
     }
 
-    private areAllTeamsAtZero() {
+    private areAllTeamsAtZero(): boolean {
         return this.currentSet.team1 === 0 && this.currentSet.team2 === 0;
     }
 
@@ -89,7 +94,7 @@ export class Game implements IGame {
         }
     }
 
-    changeSet(team: string) {
+    changeSet(team: string): boolean {
         return this.firstAndSecondSet(team) || this.threeSet(team);
     }
 
