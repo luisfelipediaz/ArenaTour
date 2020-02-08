@@ -62,7 +62,6 @@ export class Game implements IGame {
     private verifyBeginingSet() {
         if (this.areAllTeamsAtZero()) {
             this.set--;
-            this.currentSet.winner = null;
         }
     }
 
