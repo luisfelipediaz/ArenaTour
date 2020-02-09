@@ -16,7 +16,7 @@
   <app-game-score [game]="game" *ngFor="let game of games$ | async" (click)="goToGame(game)"></app-game-score>
 </ion-content>
 
-<ion-fab vertical="bottom" horizontal="center" slot="fixed" class="animated fadeInDown">
+<ion-fab vertical="bottom" *ngIf="canNewGame$ | async" horizontal="center" slot="fixed" class="animated fadeInDown">
   <ion-fab-button (click)="goToNewGame()">
     <ion-ripple-effect></ion-ripple-effect>
     <ion-icon name="add"></ion-icon>

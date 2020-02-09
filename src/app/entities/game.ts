@@ -1,6 +1,6 @@
-import { Team, Score, IGame, Teams } from '../app.model';
+import { Team, Score, GameData, Teams } from '../app.model';
 
-export class Game implements IGame {
+export class Game implements GameData {
     id: string = null;
     set: number;
     winner: Teams = null;
@@ -105,7 +105,7 @@ export class Game implements IGame {
         return this.set === 3 && this.currentSet[team] === 15;
     }
 
-    toJSON(): IGame {
+    toJSON(): GameData {
         return {
             ended: this.ended,
             id: this.id,

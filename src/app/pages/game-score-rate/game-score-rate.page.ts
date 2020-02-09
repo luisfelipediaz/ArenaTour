@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ParamsService } from 'src/app/params.service';
-import { IGame } from 'src/app/app.model';
+import { GameData } from 'src/app/app.model';
 import { Game } from 'src/app/entities/game';
 
 @Component({
@@ -11,7 +11,7 @@ import { Game } from 'src/app/entities/game';
 export class GameScoreRatePage implements OnInit {
   game: Game;
 
-  private gameJson: IGame;
+  private gameJson: GameData;
 
   constructor(
     private navParams: ParamsService

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,8 @@ export class LoginPage implements OnInit {
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private fsAuth: AngularFireAuth
   ) { }
 
   ionViewWillEnter() {
@@ -87,6 +90,10 @@ export class LoginPage implements OnInit {
 
   goToHome() {
     this.navCtrl.navigateRoot('/home-results');
+  }
+
+  loginWithGoogle() {
+    this.fsAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
   }
 
 }

@@ -1,6 +1,6 @@
 export type Teams = 'team1' | 'team2';
 
-export interface IGame {
+export interface GameData {
     id: string;
     team1: Team;
     team2: Team;
@@ -23,4 +23,10 @@ export interface Team {
     duplaNumber: number;
     duplanumber: number;
     gender: 'F' | 'M';
+}
+
+export enum Roles {
+    administrator = 'administrator',
+    referee = 'referee',
+    player = 'referee'
 }

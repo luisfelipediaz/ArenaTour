@@ -23,6 +23,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { UpdateService } from './update.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { HomeComponent } from './pages/home/home.component';
 import { TeamPipe } from './team.pipe';
 
@@ -42,7 +43,8 @@ import { TeamPipe } from './team.pipe';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFireAuthGuardModule
   ],
   entryComponents: [NotificationsComponent],
   providers: [
