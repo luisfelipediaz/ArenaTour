@@ -3,18 +3,14 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
 
 import { filter, mergeMap, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-
-import { firestore } from 'firebase/app';
-import { Roles } from '../app.model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  userData$: Observable<{ role: Roles, data: firestore.DocumentReference }>;
-  role$: Observable<Roles>;
-  document$: Observable<AngularFirestoreDocument>;
+  userData$: Observable<{ [key: string]: any; }>;
+  isAdminOrReferee$: Observable<boolean>;
 
   constructor(private fsAuth: AngularFireAuth, private fs: AngularFirestore) {
     this.extractUserData();
@@ -22,15 +18,13 @@ export class AuthService {
   }
 
   private destrocturingUserData() {
-    this.role$ = this.userData$.pipe(map(data => data.role));
-    this.document$ = this.userData$.pipe(map(data => this.fs.doc(data.data)));
+    this.isAdminOrReferee$ = this.userData$.pipe(map(data => data.admin || data.referee));
   }
 
   private extractUserData() {
     this.userData$ = this.fsAuth.user.pipe(
-      filter(user => !!user),
-      mergeMap(user => this.fs.doc<{ role: Roles; data: firestore.DocumentReference; }>(`/users/${user.uid}`).valueChanges()),
-      filter(data => !!data)
+      mergeMap(user => user ? user.getIdTokenResult() : of({ claims: {} })),
+      map(user => user.claims)
     );
   }
 }

@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
   public appPages: Array<Pages>;
-  public atitionalPages$: Observable<Pages[]>;
+  public isAdminOrReferee$: Observable<boolean>;
 
   get logged(): boolean {
     return !!this.afAuth.auth.currentUser;
@@ -40,10 +40,7 @@ export class HomeComponent implements OnInit {
       { title: 'App Settings', url: '/settings', direct: 'forward', icon: 'cog' }
     ];
 
-    this.atitionalPages$ = this.authService.role$.pipe(
-      filter(role => [Roles.referee, Roles.referee].includes(role)),
-      map(() => ([{ title: 'Nuevo partido', url: '/create-game', direct: 'root', icon: 'add-circle-outline' }]))
-    );
+    this.isAdminOrReferee$ = this.authService.isAdminOrReferee$;
   }
 
   openFacebook() {

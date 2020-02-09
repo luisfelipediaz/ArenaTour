@@ -26,7 +26,7 @@ export interface Team {
 }
 
 export enum Roles {
-    administrator = 'administrator',
+    admin = 'admin',
     referee = 'referee',
     player = 'referee'
 }

@@ -2,11 +2,10 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
-import { GameData, Roles } from 'src/app/app.model';
+import { GameData } from 'src/app/app.model';
 import { Observable } from 'rxjs';
 import { ParamsService } from 'src/app/params.service';
 import { AuthService } from 'src/app/auth/auth.service';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-game-scores',
@@ -27,7 +26,7 @@ export class GameScoresPage implements OnInit {
   ngOnInit() {
     this.games$ = this.fs.collection<GameData>(`games`).valueChanges();
 
-    this.canNewGame$ = this.authService.role$.pipe(map(role => [Roles.referee, Roles.referee].includes(role)));
+    this.canNewGame$ = this.authService.isAdminOrReferee$;
   }
 
   goToGame(game: GameData) {
