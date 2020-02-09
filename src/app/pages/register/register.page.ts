@@ -12,14 +12,9 @@ export class RegisterPage implements OnInit {
 
   constructor(
     public navCtrl: NavController,
-    public menuCtrl: MenuController,
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder
   ) { }
-
-  ionViewWillEnter() {
-    this.menuCtrl.enable(false);
-  }
 
   ngOnInit() {
     this.onRegisterForm = this.formBuilder.group({

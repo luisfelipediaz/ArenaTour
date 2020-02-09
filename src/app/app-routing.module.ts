@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { canActivate, redirectLoggedInTo } from '@angular/fire/auth-guard';
+import { canActivate, redirectLoggedInTo, AngularFireAuthGuard } from '@angular/fire/auth-guard';
 
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home-results']);
 
@@ -26,7 +26,12 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule', ...canActivate(redirectLoggedInToHome) },
+  {
+    path: 'login',
+    loadChildren: './pages/login/login.module#LoginPageModule',
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectLoggedInToHome }
+  },
 ];
 
 @NgModule({

@@ -29,7 +29,8 @@ export class AuthService {
   private extractUserData() {
     this.userData$ = this.fsAuth.user.pipe(
       filter(user => !!user),
-      mergeMap(user => this.fs.doc<{ role: Roles; data: firestore.DocumentReference; }>(`/users/${user.uid}`).valueChanges())
+      mergeMap(user => this.fs.doc<{ role: Roles; data: firestore.DocumentReference; }>(`/users/${user.uid}`).valueChanges()),
+      filter(data => !!data)
     );
   }
 }

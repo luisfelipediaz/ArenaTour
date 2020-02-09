@@ -14,7 +14,6 @@ export class LoginPage implements OnInit {
 
   constructor(
     public navCtrl: NavController,
-    public menuCtrl: MenuController,
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
@@ -22,12 +21,7 @@ export class LoginPage implements OnInit {
     private fsAuth: AngularFireAuth
   ) { }
 
-  ionViewWillEnter() {
-    this.menuCtrl.enable(false);
-  }
-
   ngOnInit() {
-
     this.onLoginForm = this.formBuilder.group({
       'email': [null, Validators.compose([
         Validators.required
@@ -92,8 +86,11 @@ export class LoginPage implements OnInit {
     this.navCtrl.navigateRoot('/home-results');
   }
 
-  loginWithGoogle() {
-    this.fsAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+  async loginWithGoogle() {
+    const user = await this.fsAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    if (!!user) {
+      this.navCtrl.navigateForward('/');
+    }
   }
 
 }

@@ -17,18 +17,12 @@ export class HomeResultsPage {
 
   constructor(
     public navCtrl: NavController,
-    public menuCtrl: MenuController,
     public popoverCtrl: PopoverController
   ) { }
-
-  ionViewWillEnter() {
-    this.menuCtrl.enable(true);
-  }
 
   settings() {
     this.navCtrl.navigateForward('settings');
   }
-
 
   async notifications(ev: any) {
     const popover = await this.popoverCtrl.create({

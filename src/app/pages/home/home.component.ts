@@ -20,6 +20,10 @@ export class HomeComponent implements OnInit {
     return !!this.afAuth.auth.currentUser;
   }
 
+  get user(): firebase.User {
+    return this.afAuth.auth.currentUser;
+  }
+
   constructor(
     public navCtrl: NavController,
     public afAuth: AngularFireAuth,
@@ -59,7 +63,7 @@ export class HomeComponent implements OnInit {
   }
 
   goToLogin() {
-    this.navCtrl.navigateForward('login');
+    this.navCtrl.navigateRoot('login');
   }
 
   logout() {
