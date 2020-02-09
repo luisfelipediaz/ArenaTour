@@ -63,7 +63,8 @@ export class HomeComponent implements OnInit {
     this.navCtrl.navigateRoot('login');
   }
 
-  logout() {
-    this.afAuth.auth.signOut();
+  async logout() {
+    await this.afAuth.auth.signOut();
+    this.navCtrl.navigateRoot('/');
   }
 }

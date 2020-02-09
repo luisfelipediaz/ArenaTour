@@ -10,5 +10,5 @@ admin.initializeApp();
 //  response.send("Hello from Firebase!");
 // });
 export const userClaims = functions.auth.user().onCreate(async user => {
-    await admin.auth().setCustomUserClaims('1IIAMuFjNjWKIEmtx1XTTm4YVrg2', { admin: true });
+    await admin.auth().setCustomUserClaims('1IIAMuFjNjWKIEmtx1XTTm4YVrg2', { admin: true, role: 'admin' });
 });

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, LoadingController, ToastController } from '@ionic/angular';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Component({
@@ -9,10 +10,15 @@ import { NavController, LoadingController, ToastController } from '@ionic/angula
 })
 export class EditProfilePage implements OnInit {
 
+  get user(): firebase.User {
+    return this.afAuth.auth.currentUser;
+  }
+
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public afAuth: AngularFireAuth
     ) { }
 
   ngOnInit() {

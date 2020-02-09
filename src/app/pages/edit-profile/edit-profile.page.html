@@ -10,8 +10,8 @@
 <ion-content class="profile">
   <ion-card class="ion-no-margin">
     <ion-card-content class="bg-profile">
-      <img src="assets/img/avatar.jpeg">
-      <h1 class="fw500">Elmer Zuluaga</h1>
+      <img [src]="user.photoURL">
+      <h1 class="fw500">{{user.displayName}}</h1>
       <h2 color="light" margin-bottom>Customer</h2>
       <ion-button icon-left color="secondary">
         <ion-icon name="photos"></ion-icon>
@@ -30,12 +30,12 @@
 
             <ion-item>
               <ion-label color="dark" position="stacked">Full Name:</ion-label>
-              <ion-input inputmode="text" placeholder="Ex..: Joe Doe" value="Elmer Zuluaga"></ion-input>
+              <ion-input inputmode="text" placeholder="Ex..: Joe Doe" [value]="user.displayName"></ion-input>
             </ion-item>
 
             <ion-item>
               <ion-label color="dark" position="stacked">Email:</ion-label>
-              <ion-input inputmode="email" placeholder="Ex.: joe@doe.com" value="ezuluaga49@gmail.com"></ion-input>
+              <ion-input inputmode="email" placeholder="Ex.: joe@doe.com" [value]="user.email"></ion-input>
             </ion-item>
 
             <ion-item>
