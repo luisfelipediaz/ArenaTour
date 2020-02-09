@@ -10,15 +10,15 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     children: [
-      { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
-      { path: 'about', loadChildren: './pages/about/about.module#AboutPageModule' },
-      { path: 'settings', loadChildren: './pages/settings/settings.module#SettingsPageModule' },
-      { path: 'edit-profile', loadChildren: './pages/edit-profile/edit-profile.module#EditProfilePageModule' },
-      { path: 'home-results', loadChildren: './pages/home-results/home-results.module#HomeResultsPageModule' },
-      { path: 'game-scores', loadChildren: './pages/game-scores/game-scores.module#GameScoresPageModule' },
-      { path: 'tienda', loadChildren: './pages/tienda/tienda.module#TiendaPageModule' },
-      { path: 'game-score-rate', loadChildren: './pages/game-score-rate/game-score-rate.module#GameScoreRatePageModule' },
-      { path: 'create-game', loadChildren: './pages/create-game/create-game.module#CreateGamePageModule' },
+      { path: 'register', loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule) },
+      { path: 'about', loadChildren: () => import('./pages/about/about.module').then(m => m.AboutPageModule) },
+      { path: 'settings', loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsPageModule) },
+      { path: 'edit-profile', loadChildren: () => import('./pages/edit-profile/edit-profile.module').then(m => m.EditProfilePageModule) },
+      { path: 'home-results', loadChildren: () => import('./pages/home-results/home-results.module').then(m => m.HomeResultsPageModule) },
+      { path: 'game-scores', loadChildren: () => import('./pages/game-scores/game-scores.module').then(m => m.GameScoresPageModule) },
+      { path: 'tienda', loadChildren: () => import('./pages/tienda/tienda.module').then(m => m.TiendaPageModule) },
+      { path: 'game-score-rate', loadChildren: () => import('./pages/game-score-rate/game-score-rate.module').then(m => m.GameScoreRatePageModule) },
+      { path: 'create-game', loadChildren: () => import('./pages/create-game/create-game.module').then(m => m.CreateGamePageModule) },
       {
         path: '',
         pathMatch: 'full',
@@ -28,7 +28,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: './pages/login/login.module#LoginPageModule',
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule),
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectLoggedInToHome }
   },
