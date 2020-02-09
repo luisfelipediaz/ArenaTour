@@ -4,6 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { redirectLoggedInTo, customClaims, AngularFireAuthGuard, hasCustomClaim } from '@angular/fire/auth-guard';
 
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home-results']);
+const adminOnly = () => hasCustomClaim('admin');
 
 const routes: Routes = [
   {
@@ -50,7 +51,7 @@ const routes: Routes = [
         path: 'profile-users',
         loadChildren: () => import('./pages/profile-users/profile-users.module').then(m => m.ProfileUsersPageModule),
         canActivate: [AngularFireAuthGuard],
-        data: { authGuardPipe: hasCustomClaim('admin') }
+        data: { authGuardPipe: adminOnly }
       },
       {
         path: '',
