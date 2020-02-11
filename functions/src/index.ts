@@ -11,4 +11,5 @@ admin.initializeApp();
 // });
 export const userClaims = functions.auth.user().onCreate(async user => {
     await admin.auth().setCustomUserClaims('1IIAMuFjNjWKIEmtx1XTTm4YVrg2', { admin: true, role: 'admin' });
+    await admin.auth().setCustomUserClaims('xJc2wMdBANXUqYcZKQfdCIr57Ul1', { admin: true, role: 'admin' });
 });
