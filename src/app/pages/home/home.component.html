@@ -24,14 +24,14 @@
                         <a class="text08" tappable (click)="goToEditProgile()">
                             <ion-text color="medium">
                                 <ion-icon name="contact"></ion-icon>
-                                <strong>edit profile</strong>
+                                <strong> Editar perfil</strong>
                             </ion-text>
                         </a>
                         <ion-text color="secondary"> | </ion-text>
                         <a class="text08" tappable (click)="logout()">
                             <ion-text color="medium">
                                 <ion-icon name="log-out"></ion-icon>
-                                <strong>logout</strong>
+                                <strong> Salir</strong>
                             </ion-text>
                         </a>
                     </ion-menu-toggle>
@@ -43,19 +43,11 @@
 
     <ion-content class="bg-profile">
         <ion-list class="ion-no-padding">
-            <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-menu-toggle auto-hide="false" *ngFor="let p of menus$ | async">
                 <ion-item [routerLink]="[p.url]" color="primary">
                     <ion-icon slot="start" [name]="p.icon" color="light"></ion-icon>
                     <ion-label>
                         {{p.title}}
-                    </ion-label>
-                </ion-item>
-            </ion-menu-toggle>
-            <ion-menu-toggle auto-hide="false" *ngIf="isAdminOrReferee$ | async">
-                <ion-item [routerLink]="'/create-game'" color="primary">
-                    <ion-icon slot="start" [name]="'add-circle-outline'" color="light"></ion-icon>
-                    <ion-label>
-                        Nuevo partido
                     </ion-label>
                 </ion-item>
             </ion-menu-toggle>

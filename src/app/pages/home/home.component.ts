@@ -3,9 +3,9 @@ import { Pages } from 'src/app/interfaces/pages';
 import { NavController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from 'src/app/auth/auth.service';
-import { map, filter } from 'rxjs/operators';
-import { Roles } from 'src/app/app.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { menusAnyUser, menusWithFlag } from 'src/app/menu';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -13,8 +13,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  public appPages: Array<Pages>;
-  public isAdminOrReferee$: Observable<boolean>;
+  public menus$: Observable<Pages[]>;
 
   get logged(): boolean {
     return !!this.afAuth.auth.currentUser;
@@ -31,16 +30,11 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.appPages = [
-      { title: 'Home', url: '/home-results', direct: 'root', icon: 'home' },
-      { title: 'Marcadores', url: '/game-scores', direct: 'root', icon: 'baseball' },
-      { title: 'Nosotros', url: '/about', direct: 'forward', icon: 'information-circle-outline' },
-      { title: 'Historia', url: '/about', direct: 'forward', icon: 'information-circle-outline' },
-      { title: 'Tienda', url: '/tienda', direct: 'forward', icon: 'card' },
-      { title: 'App Settings', url: '/settings', direct: 'forward', icon: 'cog' }
-    ];
-
-    this.isAdminOrReferee$ = this.authService.isAdminOrReferee$;
+    this.menus$ = this.authService.role$.pipe(
+      map((role) => ([...menusWithFlag.filter(menu => menu.flag & role), ...menusAnyUser])),
+      startWith(menusAnyUser),
+      map(menus => menus.sort((ant, act) => ant.order > act.order ? 1 : -1))
+    );
   }
 
   openFacebook() {

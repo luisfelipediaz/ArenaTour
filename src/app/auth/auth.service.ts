@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 
 import { filter, mergeMap, map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { Roles } from '../app.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ import { Observable, of } from 'rxjs';
 export class AuthService {
   userData$: Observable<{ [key: string]: any; }>;
   isAdminOrReferee$: Observable<boolean>;
+  isAdmin$: Observable<boolean>;
+  role$: Observable<Roles>;
 
   constructor(private fsAuth: AngularFireAuth, private fs: AngularFirestore) {
     this.extractUserData();
@@ -18,7 +21,9 @@ export class AuthService {
   }
 
   private destrocturingUserData() {
+    this.isAdmin$ = this.userData$.pipe(map(data => data.admin));
     this.isAdminOrReferee$ = this.userData$.pipe(map(data => data.admin || data.referee));
+    this.role$ = this.userData$.pipe(map(data => Roles[data.role as string]));
   }
 
   private extractUserData() {

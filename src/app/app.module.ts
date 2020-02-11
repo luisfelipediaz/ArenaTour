@@ -21,12 +21,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { UpdateService } from './update.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { HomeComponent } from './pages/home/home.component';
-import { TeamPipe } from './team.pipe';
-
 
 @NgModule({
   declarations: [AppComponent, NotificationsComponent, HomeComponent],
@@ -44,7 +43,8 @@ import { TeamPipe } from './team.pipe';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularFireAuthGuardModule
+    AngularFireAuthGuardModule,
+    AngularFireFunctionsModule
   ],
   entryComponents: [NotificationsComponent],
   providers: [

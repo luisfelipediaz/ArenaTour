@@ -2,9 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { redirectLoggedInTo, customClaims, AngularFireAuthGuard, hasCustomClaim } from '@angular/fire/auth-guard';
+import { pipe } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home-results']);
 const adminOnly = () => hasCustomClaim('admin');
+const adminOrRefereeOnly = () => pipe(customClaims, map(claims => claims.admin || claims.referee));
 
 const routes: Routes = [
   {
@@ -45,7 +48,9 @@ const routes: Routes = [
       },
       {
         path: 'create-game',
-        loadChildren: () => import('./pages/create-game/create-game.module').then(m => m.CreateGamePageModule)
+        loadChildren: () => import('./pages/create-game/create-game.module').then(m => m.CreateGamePageModule),
+        canActivate: [AngularFireAuthGuard],
+        data: { authGuardPipe: adminOrRefereeOnly }
       },
       {
         path: 'profile-users',

@@ -8,6 +8,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
   templateUrl: './edit-profile.page.html',
   styleUrls: ['./edit-profile.page.scss'],
 })
+// tslint:disable-next-line: component-class-suffix
 export class EditProfilePage implements OnInit {
 
   get user(): firebase.User {

@@ -26,7 +26,7 @@ export interface Team {
 }
 
 export enum Roles {
-    admin = 'admin',
-    referee = 'referee',
-    player = 'referee'
+    admin = 1,
+    referee = 2,
+    player = 4
 }
