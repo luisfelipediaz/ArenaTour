@@ -23,7 +23,7 @@
         <h2>{{ user.displayName }}</h2>
         <h3>{{ user.email }}</h3>
       </ion-label>
-      <ion-select cancel-text="Cancelar" slot="end" [value]="user.customClaims?.role" interface="action-sheet">
+      <ion-select cancel-text="Cancelar" slot="end" [value]="user.customClaims?.role" (ionChange)="changeRoleUser($event, user)" interface="action-sheet">
         <ion-select-option [value]="'admin'">Admin</ion-select-option>
         <ion-select-option [value]="'referee'">Arbitro</ion-select-option>
         <ion-select-option [value]="'player'">Jugador</ion-select-option>
