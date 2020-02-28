@@ -24,7 +24,7 @@ export class GameScoresPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.games$ = this.fs.collection<GameData>(`games`).valueChanges();
+    this.games$ = this.fs.collection<GameData>(`games`, (query) => query.where('active', '==', true)).valueChanges();
 
     this.canNewGame$ = this.authService.isAdminOrReferee$;
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 
@@ -10,7 +10,7 @@ import { Game } from 'src/app/entities/game';
   templateUrl: './game-score.component.html',
   styleUrls: ['./game-score.component.scss']
 })
-export class GameScoreComponent implements OnInit {
+export class GameScoreComponent {
   @Input() game: Game;
 
   get score(): Score {
@@ -26,9 +26,6 @@ export class GameScoreComponent implements OnInit {
   }
 
   constructor(private fs: AngularFirestore) { }
-
-  ngOnInit() {
-  }
 
   incrementTeamOne() {
     this.game.rate('team1');
@@ -50,8 +47,14 @@ export class GameScoreComponent implements OnInit {
     this.saveChanges();
   }
 
-  private saveChanges() {
-    this.fs.doc(`games/${this.game.id}`).update(this.game.toJSON());
+  private async saveChanges() {
+    await this.fs.doc(`games/${this.game.id}`).update(this.game.toJSON());
+  }
+
+  async inactiveGame() {
+    this.game.inactive();
+    await this.saveChanges();
+    alert('Se ha ocultado el juego');
   }
 
 }

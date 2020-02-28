@@ -13,7 +13,8 @@
 
 <ion-content class="ion-padding">
   <img src="assets/img/LOGOAPP.png" alt="">
-  <app-game-score [game]="game" *ngFor="let game of games$ | async" (click)="goToGame(game)"></app-game-score>
+  <app-game-score [game]="game" *ngFor="let game of games$ | async" [isAdminOrReferee]="canNewGame$ | async"
+    (goToGame)="goToGame(game)"></app-game-score>
 </ion-content>
 
 <ion-fab vertical="bottom" *ngIf="canNewGame$ | async" horizontal="center" slot="fixed" class="animated fadeInDown">

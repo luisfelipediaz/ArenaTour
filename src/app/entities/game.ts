@@ -6,6 +6,7 @@ export class Game implements GameData {
     winner: Teams = null;
     scores: Score[];
     ended = false;
+    active = true;
 
     get currentSet(): Score {
         return this.scores[this.set - 1];
@@ -105,6 +106,10 @@ export class Game implements GameData {
         return this.set === 3 && this.currentSet[team] === 15;
     }
 
+    inactive() {
+        this.active = false;
+    }
+
     toJSON(): GameData {
         return {
             ended: this.ended,
@@ -114,7 +119,10 @@ export class Game implements GameData {
             team1: this.team1,
             team2: this.team2,
             winner: this.winner,
-            lengthen: this.lengthen
+            lengthen: this.lengthen,
+            active: this.active
         };
     }
+
+
 }

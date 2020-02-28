@@ -7,6 +7,7 @@ export interface GameData {
     set: number;
     winner: Teams;
     ended: boolean;
+    active: boolean;
     scores: Score[];
     lengthen: boolean;
 }

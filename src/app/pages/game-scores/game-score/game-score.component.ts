@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { GameData, Score } from 'src/app/app.model';
 
 @Component({
@@ -6,8 +6,10 @@ import { GameData, Score } from 'src/app/app.model';
   templateUrl: './game-score.component.html',
   styleUrls: ['./game-score.component.scss']
 })
-export class GameScoreComponent implements OnInit {
+export class GameScoreComponent {
   @Input() game: GameData;
+  @Input() isAdminOrReferee: boolean;
+  @Output() goToGame = new EventEmitter<void>();
 
   get score(): Score {
     return this.game.scores[this.game.set - 1];
@@ -21,9 +23,10 @@ export class GameScoreComponent implements OnInit {
     return this.game.scores.filter(score => score.winner === 'team2').length;
   }
 
-  constructor() { }
+  emitGoToGame() {
+    if (!this.isAdminOrReferee) { return; }
 
-  ngOnInit() {
+    this.goToGame.emit();
   }
 
 }
