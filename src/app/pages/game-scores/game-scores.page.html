@@ -11,10 +11,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content fullscreen>
   <img src="assets/img/LOGOAPP.png" alt="">
-  <app-game-score [game]="game" *ngFor="let game of games$ | async" [isAdminOrReferee]="canNewGame$ | async"
-    (goToGame)="goToGame(game)"></app-game-score>
+  <ion-list>
+    <app-game-score [game]="game" *ngFor="let game of games$ | async" [isAdminOrReferee]="canNewGame$ | async"
+      (goToGame)="goToGame(game)"></app-game-score>
+  </ion-list>
 </ion-content>
 
 <ion-fab vertical="bottom" *ngIf="canNewGame$ | async" horizontal="center" slot="fixed" class="animated fadeInDown">
