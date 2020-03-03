@@ -1,34 +1,62 @@
+<ion-item>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-button expand="full" color="success" (click)="incrementTeamOne()" class="ion-no-margin">
+                    +
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-avatar>
+                    <img [src]="getTeam1Logo()">
+                </ion-avatar>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-button expand="full" color="danger" (click)="decrementTeamOne()" class="ion-no-margin">
+                    -
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-label class="ion-text-center">
+        <h1>{{score.team1}}</h1>
+        <h2>{{game.team1 | team}}</h2>
+        <p>{{setsTeam1}}</p>
+    </ion-label>
+    <ion-label class="ion-text-center">
+        <h1>{{score.team2}}</h1>
+        <h2>{{game.team2 | team}}</h2>
+        <p>{{setsTeam2}}</p>
+    </ion-label>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-button expand="full" color="success" (click)="incrementTeamTwo()" class="ion-no-margin">
+                    +
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-avatar>
+                    <img [src]="getTeam2Logo()">
+                </ion-avatar>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-button expand="full" color="danger" (click)="decrementTeamTwo()" class="ion-no-margin">
+                    -
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-item>
 <ion-grid>
-    <ion-row>
-        <ion-col size="2" class="ion-no-padding ion-no-margin">
-            <h1>{{score.team1}}</h1>
-            <app-buttons (increment)="incrementTeamOne()" (decrement)="decrementTeamOne()"></app-buttons>
-        </ion-col>
-        <ion-col size="8">
-            <ion-grid>
-                <ion-row>
-                    <ion-col>
-                        {{game.team1 | team}}
-                    </ion-col>
-                    <ion-col>
-                        {{game.team2 | team}}
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col>
-                        {{setsTeam1}}
-                    </ion-col>
-                    <ion-col>
-                        {{setsTeam2}}
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-col>
-        <ion-col size="2" class="ion-no-padding ion-no-margin">
-            <h1>{{score.team2}}</h1>
-            <app-buttons (increment)="incrementTeamTwo()" (decrement)="decrementTeamTwo()"></app-buttons>
-        </ion-col>
-    </ion-row>
     <ion-row>
         <ion-col>
             <ion-button color="danger" size="small" (click)="inactiveGame()">Ocultar juego</ion-button>

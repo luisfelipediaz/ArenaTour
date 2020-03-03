@@ -57,4 +57,11 @@ export class GameScoreComponent {
     alert('Se ha ocultado el juego');
   }
 
+  getTeam1Logo() {
+    return `assets/logos/${this.game.team1.club}.jpg`;
+  }
+
+  getTeam2Logo() {
+    return `assets/logos/${this.game.team2.club}.jpg`;
+  }
 }

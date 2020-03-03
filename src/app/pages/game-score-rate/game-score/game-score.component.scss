@@ -1,3 +1,15 @@
 ion-col {
   text-align: center;
 }
+
+ion-avatar {
+  width: 100px;
+  height: 100px;
+}
+
+ion-item {
+  --padding-end: 0px;
+  --padding-start: 0px;
+  --inner-padding-end: 0px;
+  --inner-padding-start: 0px;
+}
