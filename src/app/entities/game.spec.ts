@@ -9,7 +9,7 @@ fdescribe('Game', () => {
     const game = new Game({} as any, {} as any, false);
     game.rate('team1');
 
-    const actual = game.changeSet('team1');
+    const actual = game.isChangeSet('team1');
 
     expect(actual).toBeFalsy();
   });
@@ -28,7 +28,7 @@ fdescribe('Game', () => {
       winner: null
     };
 
-    const actual = game.changeSet('team1');
+    const actual = game.isChangeSet('team1');
     expect(actual).toBeTruthy();
   });
 
@@ -165,6 +165,58 @@ fdescribe('Game', () => {
     expect(game.scores[2].team2).toEqual(12);
   });
 
+  // tslint:disable-next-line: max-line-length
+  it('debe "rate" no marcar ganador cuando van 20, 20 puntua el primer o el segundo equipo y el partido tiene alargue y es el set 1 o 2', () => {
+    const game = new Game({} as any, {} as any, true);
+    game.set = 1;
+    game.scores[0] = {
+      team1: 20,
+      team2: 20,
+      winner: null
+    };
+
+    game.rate('team1');
+    expect(game.scores[0].winner).toBeNull();
+    expect(game.pointToFinishSet).toBe(22);
+
+    game.rate('team2');
+    expect(game.scores[0].winner).toBeNull();
+    expect(game.pointToFinishSet).toBe(23);
+
+    game.rate('team2');
+    game.rate('team2');
+
+    expect(game.scores[0].winner).toBe('team2');
+    expect(game.pointToFinishSet).toBe(21);
+  });
+
+  // tslint:disable-next-line: max-line-length
+  it('debe "rate" no marcar ganador cuando van 14, 14 puntua el primer o el segundo equipo y el partido tiene alargue y es el tercer set', () => {
+    const game = new Game({} as any, {} as any, true);
+    game.set = 3;
+    game.scores[0].winner = 'team1';
+    game.scores[1].winner = 'team2';
+    game.scores[2] = {
+      team1: 14,
+      team2: 14,
+      winner: null
+    };
+
+    game.rate('team1');
+    expect(game.scores[2].winner).toBeNull();
+    expect(game.pointToFinishSet).toBe(16);
+
+    game.rate('team2');
+    expect(game.scores[2].winner).toBeNull();
+    expect(game.pointToFinishSet).toBe(17);
+
+    game.rate('team2');
+    game.rate('team2');
+
+    expect(game.scores[2].winner).toBe('team2');
+    expect(game.pointToFinishSet).toBe(17);
+  });
+
   function firstWay() {
     const game = new Game({} as any, {} as any, false);
     game.set = 1;
@@ -174,7 +226,7 @@ fdescribe('Game', () => {
       winner: null
     };
 
-    const actual = game.changeSet('team1');
+    const actual = game.isChangeSet('team1');
     expect(actual).toBeTruthy();
   }
 
@@ -187,7 +239,7 @@ fdescribe('Game', () => {
       winner: null
     };
 
-    const actual = game.changeSet('team1');
+    const actual = game.isChangeSet('team1');
     expect(actual).toBeTruthy();
   }
 });

@@ -1,5 +1,11 @@
 import { Team, Score, GameData, Teams } from '../app.model';
 
+const topSets = {
+    1: 20,
+    2: 20,
+    3: 14
+};
+
 export class Game implements GameData {
     id: string = null;
     set: number;
@@ -7,6 +13,18 @@ export class Game implements GameData {
     scores: Score[];
     ended = false;
     active = true;
+
+    get topSet(): number {
+        return topSets[this.set];
+    }
+
+    get pointToFinishSet(): number {
+        if (this.currentSet.team1 < this.topSet || this.currentSet.team2 < this.topSet) { return this.topSet + 1; }
+
+        if (this.currentSet.team1 - this.currentSet.team2 < 2) {
+            return Math.min(this.currentSet.team1, this.currentSet.team2) + 2;
+        }
+    }
 
     get currentSet(): Score {
         return this.scores[this.set - 1];
@@ -75,7 +93,7 @@ export class Game implements GameData {
     }
 
     private proccessIfChangeSet(team: Teams) {
-        if (this.changeSet(team)) {
+        if (this.isChangeSet(team)) {
             this.changeSetTeam(team);
         }
     }
@@ -86,7 +104,7 @@ export class Game implements GameData {
     }
 
     private verifyEnded(team: Teams) {
-        if (this.scores.filter(a => a.winner === team).length === 2) {
+        if (this.howManySetsTeamWon(team) === 2) {
             this.ended = true;
             this.winner = team;
         } else {
@@ -94,16 +112,12 @@ export class Game implements GameData {
         }
     }
 
-    changeSet(team: string): boolean {
-        return this.firstAndSecondSet(team) || this.threeSet(team);
+    private howManySetsTeamWon(team: Teams): number {
+        return this.scores.filter(a => a.winner === team).length;
     }
 
-    private firstAndSecondSet(team: string) {
-        return this.set <= 2 && this.currentSet[team] === 21;
-    }
-
-    private threeSet(team: string) {
-        return this.set === 3 && this.currentSet[team] === 15;
+    isChangeSet(team: string): boolean {
+        return this.currentSet[team] === this.pointToFinishSet;
     }
 
     inactive() {
@@ -123,6 +137,4 @@ export class Game implements GameData {
             active: this.active
         };
     }
-
-
 }
