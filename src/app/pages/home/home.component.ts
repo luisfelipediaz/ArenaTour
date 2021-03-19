@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Pages } from 'src/app/interfaces/pages';
 import { NavController } from '@ionic/angular';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from 'src/app/auth/auth.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { menusAnyUser, menusWithFlag } from 'src/app/menu';
-import { map, startWith } from 'rxjs/operators';
+import { map, shareReplay, startWith, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -15,17 +14,12 @@ import { map, startWith } from 'rxjs/operators';
 export class HomeComponent implements OnInit {
   public menus$: Observable<Pages[]>;
 
-  get logged(): boolean {
-    return !!this.afAuth.auth.currentUser;
-  }
-
-  get user(): firebase.User {
-    return this.afAuth.auth.currentUser;
+  get user$() {
+    return this.authService.userData$;
   }
 
   constructor(
     public navCtrl: NavController,
-    public afAuth: AngularFireAuth,
     private authService: AuthService
   ) { }
 
@@ -58,7 +52,7 @@ export class HomeComponent implements OnInit {
   }
 
   async logout() {
-    await this.afAuth.auth.signOut();
-    this.navCtrl.navigateRoot('/');
+    await this.authService.logout();
+    this.navCtrl.navigateRoot('home-results');
   }
 }

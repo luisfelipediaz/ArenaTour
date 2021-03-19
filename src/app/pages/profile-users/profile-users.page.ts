@@ -10,15 +10,15 @@ import { map } from 'rxjs/operators';
 })
 // tslint:disable-next-line: component-class-suffix
 export class ProfileUsersPage implements OnInit {
-  getUsers$: (data: void) => Observable<{ users: (firebase.UserInfo & { customClaims: any })[] }>;
+  getUsers$: (data: void) => Observable<{ users: (firebase.default.UserInfo & { customClaims: any })[] }>;
   setUserClaim$: (data: { uid: string; role: string; }) => Observable<void>;
 
-  users$: Observable<firebase.UserInfo[]>;
+  users$: Observable<firebase.default.UserInfo[]>;
 
   constructor(
     private aff: AngularFireFunctions
   ) {
-    this.getUsers$ = this.aff.httpsCallable<void, { users: (firebase.UserInfo & { customClaims: any })[] }>('getUsers');
+    this.getUsers$ = this.aff.httpsCallable<void, { users: (firebase.default.UserInfo & { customClaims: any })[] }>('getUsers');
     this.setUserClaim$ = this.aff.httpsCallable<{ uid: string, role: string }, void>('setUserClaim');
   }
 
@@ -26,7 +26,7 @@ export class ProfileUsersPage implements OnInit {
     this.users$ = this.getUsers$().pipe(map(data => data.users));
   }
 
-  async changeRoleUser(newRole: { detail: { value: string } }, user: firebase.UserInfo) {
+  async changeRoleUser(newRole: { detail: { value: string } }, user: firebase.default.UserInfo) {
     await this.setUserClaim$({ uid: user.uid, role: newRole.detail.value }).toPromise();
     alert('Usuario actualizado con éxito');
   }

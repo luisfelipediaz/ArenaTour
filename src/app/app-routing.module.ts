@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home-results']);
 const adminOnly = () => hasCustomClaim('admin');
-const adminOrRefereeOnly = () => pipe(customClaims, map(claims => claims.admin || claims.referee));
+const adminOrRefereeOnly = () => pipe(customClaims, map(claims => claims.admin || claims.role === 'referee'));
 
 const routes: Routes = [
   {
@@ -74,7 +74,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 

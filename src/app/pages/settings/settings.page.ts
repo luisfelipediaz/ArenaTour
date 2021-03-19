@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-settings',
@@ -19,13 +19,13 @@ export class SettingsPage implements OnInit {
   paymentMethods: any = ['Paypal', 'Credit Card'];
   currencies: any = ['USD', 'BRL', 'EUR'];
 
-  get user(): firebase.User {
-    return this.afAuth.auth.currentUser;
+  get user$() {
+    return this.afAuth.userData$;
   }
 
   constructor(
     public navCtrl: NavController,
-    public afAuth: AngularFireAuth
+    public afAuth: AuthService
   ) { }
 
   ngOnInit() {
@@ -36,7 +36,7 @@ export class SettingsPage implements OnInit {
   }
 
   async logout() {
-    await this.afAuth.auth.signOut();
+    await this.afAuth.logout();
     this.navCtrl.navigateRoot('/');
   }
 

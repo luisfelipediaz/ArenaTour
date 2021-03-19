@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, LoadingController, ToastController } from '@ionic/angular';
-import { AngularFireAuth } from '@angular/fire/auth';
-
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -11,15 +10,15 @@ import { AngularFireAuth } from '@angular/fire/auth';
 // tslint:disable-next-line: component-class-suffix
 export class EditProfilePage implements OnInit {
 
-  get user(): firebase.User {
-    return this.afAuth.auth.currentUser;
+  get user$() {
+    return this.afAuth.userData$;
   }
 
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
-    public afAuth: AngularFireAuth
+    public afAuth: AuthService
     ) { }
 
   ngOnInit() {
@@ -33,7 +32,6 @@ export class EditProfilePage implements OnInit {
     loader.present();
     loader.onWillDismiss().then(async l => {
       const toast = await this.toastCtrl.create({
-        showCloseButton: true,
         cssClass: 'bg-profile',
         message: 'Your Data was Edited!',
         duration: 3000,

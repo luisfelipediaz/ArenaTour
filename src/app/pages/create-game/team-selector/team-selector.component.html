@@ -9,11 +9,13 @@
 
 <ion-content>
     <ion-list>
-        <ion-item *ngFor="let item of teams$ | async" (click)="emitChangeSelected(item)">
-            <ion-label>
-                {{item | team: 'all'}}
-            </ion-label>
-            <ion-radio slot="start" [checked]="team?.id === item.id"></ion-radio>
-        </ion-item>
+        <ion-radio-group [value]="team?.id">
+            <ion-item *ngFor="let item of teams$ | async" (click)="emitChangeSelected(item)">
+                <ion-label>
+                    {{item | team: 'all'}}
+                </ion-label>
+                <ion-radio slot="start" [value]="item.id"></ion-radio>
+            </ion-item>
+        </ion-radio-group>
     </ion-list>
 </ion-content>

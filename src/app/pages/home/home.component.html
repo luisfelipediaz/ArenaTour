@@ -6,7 +6,7 @@
             </ion-toolbar>
         </ion-header>
 
-        <ion-toolbar color="dark" *ngIf="logged" class="user-profile">
+        <ion-toolbar color="dark" *ngIf="user$ | async as user;" class="user-profile">
             <ion-item>
                 <ion-avatar slot="start" class="user-avatar">
                     <img [src]="user.photoURL">
@@ -56,7 +56,7 @@
 
     <ion-footer>
         <ion-grid class="btn-group">
-            <ion-row *ngIf="!logged">
+            <ion-row *ngIf="!(user$ | async)">
                 <ion-col>
                     <ion-button size="small" expand="block" (click)="goToLogin()">Iniciar sesión</ion-button>
                 </ion-col>

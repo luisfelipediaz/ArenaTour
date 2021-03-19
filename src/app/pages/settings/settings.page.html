@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="user$ | async as user">
   <ion-item class="bg-profile">
     <ion-avatar slot="start">
       <img [src]="user.photoURL" class="user-avatar">

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
+import { NavController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase';
+import firebase from 'firebase/app';
 
 @Component({
   selector: 'app-login',
@@ -61,7 +61,6 @@ export class LoginPage implements OnInit {
             loader.present();
             loader.onWillDismiss().then(async l => {
               const toast = await this.toastCtrl.create({
-                showCloseButton: true,
                 message: 'Email was sended successfully.',
                 duration: 3000,
                 position: 'bottom'
@@ -87,14 +86,14 @@ export class LoginPage implements OnInit {
   }
 
   async loginWithFacebook() {
-    const user = await this.fsAuth.auth.signInWithPopup(new auth.FacebookAuthProvider());
+    const user = await this.fsAuth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
     if (!!user) {
       this.navCtrl.navigateForward('/');
     }
   }
 
   async loginWithGoogle() {
-    const user = await this.fsAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    const user = await this.fsAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
     if (!!user) {
       this.navCtrl.navigateForward('/');
     }
