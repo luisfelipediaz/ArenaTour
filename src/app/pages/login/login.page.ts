@@ -86,6 +86,13 @@ export class LoginPage implements OnInit {
     this.navCtrl.navigateRoot('/home-results');
   }
 
+  async loginWithFacebook() {
+    const user = await this.fsAuth.auth.signInWithPopup(new auth.FacebookAuthProvider());
+    if (!!user) {
+      this.navCtrl.navigateForward('/');
+    }
+  }
+
   async loginWithGoogle() {
     const user = await this.fsAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
     if (!!user) {
