@@ -28,7 +28,7 @@ export class AuthService {
 
   private destrocturingUserData() {
     this.isAdmin$ = this.userDataClaims$.pipe(map(data => data.admin));
-    this.isAdminOrReferee$ = this.userDataClaims$.pipe(map(data => data.admin || data.referee));
+    this.isAdminOrReferee$ = this.userDataClaims$.pipe(map(data => data.admin || data.role === 'referee'));
     this.role$ = this.userDataClaims$.pipe(map(data => Roles[data.role as string]));
   }
 

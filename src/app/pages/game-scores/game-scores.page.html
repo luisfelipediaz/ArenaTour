@@ -12,7 +12,7 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <img src="assets/img/LOGOAPP.png" alt="">
+  <img src="assets/img/LOGOAPP.png" class="logo">
   <ion-list>
     <app-game-score [game]="game" *ngFor="let game of games$ | async" [isAdminOrReferee]="canNewGame$ | async"
       (goToGame)="goToGame(game)"></app-game-score>

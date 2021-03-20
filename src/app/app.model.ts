@@ -1,4 +1,4 @@
-export type Teams = 'team1' | 'team2';
+export type Teams = 'team1' | 'team2' | '';
 
 export interface GameData {
     id: string;

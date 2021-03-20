@@ -9,7 +9,7 @@ const topSets = {
 export class Game implements GameData {
     id: string = null;
     set: number;
-    winner: Teams = null;
+    winner: Teams = '';
     scores: Score[];
     ended = false;
     active = true;
@@ -19,9 +19,10 @@ export class Game implements GameData {
     }
 
     get pointToFinishSet(): number {
+        if (!this.lengthen) { return this.topSet + 1; }
         if (this.currentSet.team1 < this.topSet || this.currentSet.team2 < this.topSet) { return this.topSet + 1; }
 
-        if (this.currentSet.team1 - this.currentSet.team2 < 2) {
+        if (Math.abs(this.currentSet.team1 - this.currentSet.team2) <= 2) {
             return Math.min(this.currentSet.team1, this.currentSet.team2) + 2;
         }
     }
@@ -56,7 +57,7 @@ export class Game implements GameData {
     }
 
     private proccessUnrate(team: string) {
-        this.winner = null;
+        this.winner = '';
         this.currentSet.winner = null;
         this.ended = false;
         this.currentSet[team]--;
